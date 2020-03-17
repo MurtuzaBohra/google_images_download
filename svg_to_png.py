@@ -1,18 +1,13 @@
 import os
-from svglib.svglib import svg2rlg
-from reportlab.graphics import renderPM
 
-svg_dir = './svg_2/'
-png_dir = './png_2/'
+svg_dir = './svg/'
+png_dir = './png/'
 
 def create_dir(directory):
 	cmd = "mkdir "+directory+""
 	os.system(cmd)
 
 all_dir = os.listdir(svg_dir)
-print('********')
-print(all_dir)
-print('********')
 
 for directory in all_dir:
 
@@ -21,20 +16,13 @@ for directory in all_dir:
 	create_dir(png_filename)
 
 	files = os.listdir(svg_filename)
-	print('--------')
-	print(files)
-	print('--------')
 
 	for file in files:
-		svg_filename = svg_filename+file
-		png_filename = png_filename+file.rstrip('.svg')+'.png'
 
 		try:
-			drawing = svg2rlg(svg_filename)
-			renderPM.drawToFile(drawing, png_filename, fmt="PNG")
+			cmd = "inkscape -z -e "+png_filename+file.rstrip('.svg')+'.png'+" -w 1024 -b \'#ffffff\' "+svg_filename+file+""
+			os.system(cmd)
 		except:
 			print('***could not convert***')
 	print('******************************')
-
-		
 
