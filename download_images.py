@@ -125,6 +125,7 @@ for original_query in query_list:
 
 		for query in related_queries:
 			if(original_query not in all_queries_list):
+				all_queries_list.append(query)
 				download_image_for_query(query)
 				print('--------------')
 				print('count_all, unique', count_all, len(image_links_global))
