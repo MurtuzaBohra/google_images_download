@@ -67,7 +67,7 @@ def download_images(image_links, directory):
 		url = url.strip('\"')
 
 		# if(link[-1]==".svg\""):
-		filename = directory+'/'+str(file_count)+link[-1].rstrip('"')
+		filename = directory+'/'+str(file_count)+link[2].rstrip('"')
 		try:
 			download(url, filename)
 		except:
@@ -124,7 +124,7 @@ for original_query in query_list:
 		related_queries = get_related_queries(html_filename)
 
 		for query in related_queries:
-			if(original_query not in all_queries_list):
+			if(query not in all_queries_list):
 				all_queries_list.append(query)
 				download_image_for_query(query)
 				print('--------------')
