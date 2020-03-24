@@ -111,19 +111,28 @@ def download_image_for_query(query):
 
 #------------------------------------------------------------------
 #------------------------------------------------------------------
+all_queries_list = []
 for original_query in query_list:
-	html_filename = download_image_for_query(original_query)
+	if(original_query not in all_queries_list):
+		all_queries_list.append(original_query)
+		html_filename = download_image_for_query(original_query)
 
-	print('--------------')
-	print('count_all, unique', count_all, len(image_links_global))
-	print('--------------')
-
-	related_queries = get_related_queries(html_filename)
-
-	for query in related_queries:
-		download_image_for_query(query)
 		print('--------------')
 		print('count_all, unique', count_all, len(image_links_global))
 		print('--------------')
+
+		related_queries = get_related_queries(html_filename)
+
+		for query in related_queries:
+			if(original_query not in all_queries_list):
+				download_image_for_query(query)
+				print('--------------')
+				print('count_all, unique', count_all, len(image_links_global))
+				print('--------------')
+			else:
+				print('*********QUERY REPEATED***********')
+	else:
+		print('*********QUERY REPEATED***********')
+
 #------------------------------------------------------------------
 #------------------------------------------------------------------
